@@ -1,122 +1,44 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 
+const workstreams = [
+  { name: 'Learning Response', dates: 'Apr 2026 – Oct 2026', tags: ['Java', 'Spring Boot', 'AWS Lambda', 'Amazon S3'], details: ['Developed backend services using Java and Spring Boot for scalable APIs and microservices.', 'Worked with AWS Lambda and S3 for serverless processing and storage solutions.'] },
+  { name: 'UPS — Alchemy', dates: 'Oct 2025 – Apr 2026', tags: ['Java', 'Spring Boot', 'Python', 'Azure AI', 'Azure OpenAI', 'Document Intelligence', 'Content Understanding', 'AI Foundry Agents', 'Azure Functions', 'Container Apps', 'Container Registry', 'Managed Identities', 'Key Vault', 'App Configuration'], details: ['Developed intelligent document processing backend services to process and interpret logistics shipment documents.', 'Built REST APIs for document classification and extraction using Azure Document Intelligence and Azure Content Understanding.', 'Explored and implemented Azure AI Foundry Agents with Python Azure Function Apps to interact with AI models and integrate API workflows.', 'Containerized backend services and configured secure communication using managed identities, Key Vault, and App Configuration.'] },
+  { name: 'Pandora A/S — Loyalty Integration Migration', dates: 'Sep 2024 – Oct 2025', tags: ['Java', 'Spring Boot', 'Azure Logic Apps', 'Azure Functions', 'Data Factory', 'Blob Storage', 'FTP'], details: ['Developed backend microservices to support migration of loyalty services from Brierley to Salesforce.', 'Built integration pipelines for orchestrating loyalty data workflows.', 'Implemented encrypted file processing pipelines with Blob Storage and FTP integrations for secure data exchange.'] },
+  { name: 'Order Inventory Management System', dates: 'Dec 2023 – Apr 2024', tags: ['Java', 'Spring Boot', 'React', 'Azure'], details: ['Developed product catalog and inventory management features.', 'Worked on inventory services, product category pagination, and product image upload functionality.'] },
+]
+
+const skillGroups = [
+  ['Languages', ['Java', 'Python', 'JavaScript', 'C++']],
+  ['Backend', ['Spring Boot', 'FastAPI', 'REST APIs', 'Microservices', 'Distributed Systems']],
+  ['Cloud & AI', ['AWS', 'AWS Lambda', 'Amazon S3', 'Azure', 'Azure AI Foundry', 'Azure OpenAI', 'Document Intelligence', 'Content Understanding']],
+  ['Azure Services', ['Azure Functions', 'Logic Apps', 'Data Factory', 'Blob Storage', 'Container Apps', 'Container Registry', 'Key Vault', 'App Configuration']],
+  ['Frontend', ['React', 'JavaScript']],
+]
+
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+  const [dark, setDark] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const links = [['About', 'about'], ['Experience', 'experience'], ['Projects', 'projects'], ['Skills', 'skills'], ['Education', 'education'], ['Contact', 'contact']]
+  return <div className={`site ${dark ? 'dark' : ''}`}>
+    <header className="header"><a className="brand" href="#home" aria-label="Jathin Thokala home">JT<span>.</span><b>Jathin Thokala</b></a>
+      <button className="menu-toggle" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? '×' : '☰'}</button>
+      <nav className={menuOpen ? 'nav open' : 'nav'} aria-label="Main navigation">{links.map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav>
+      <button className="theme-toggle" onClick={() => setDark(!dark)} aria-label={`Switch to ${dark ? 'light' : 'dark'} theme`} title="Toggle theme">{dark ? '☼' : '◐'}</button>
+    </header>
+    <main>
+      <section className="hero wrap" id="home"><div className="hero-text"><p className="eyebrow"><span className="availability" /> SOFTWARE ENGINEER <span className="divider">/</span> BENGALURU, INDIA</p><h1>Hi, I’m<br /><span>Jathin Thokala.</span></h1><h2>Software Engineer</h2><p className="hero-intro">I build backend applications, cloud services, and AI-powered solutions with Java, Spring Boot, Python, and cloud platforms.</p><div className="hero-tags">{['Java', 'Spring Boot', 'Python', 'AI', 'Azure', 'AWS'].map(x => <span key={x}>{x}</span>)}</div><div className="hero-actions"><a className="btn primary" href="#projects">View my work <span>↗</span></a><a className="btn outline" href="#contact">Contact me</a><a className="resume" href="/resume/Jathin-Thokala-Resume.pdf" download>Download resume <span>↓</span></a></div><div className="hero-social"><a href="https://github.com/JathinT" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/jathinthokala" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div>
+        <div className="avatar-frame"><img className="avatar-image" src="/images/jathin-developer.png" alt="Illustration of Jathin Thokala, Software Engineer" /></div>
       </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <section className="section wrap about" id="about"><div className="section-title"><p className="eyebrow">01 — ABOUT</p><h2>About Me</h2></div><div className="about-content"><p className="big-copy">I’m Jathin, a software engineer with 3+ years of professional experience building backend systems and cloud-native applications.</p><p>I work primarily with Java and Spring Boot, and also build with Python and FastAPI. My experience includes REST APIs, microservices, AI-powered applications, and cloud services across Azure and AWS. I care about making software reliable, maintainable, and useful.</p><div className="about-facts"><span><b>3+</b> years experience</span><span><b>India</b> based in Bengaluru</span><span><b>2019–23</b> NIT Rourkela</span></div></div></section>
+      <section className="section experience-section" id="experience"><div className="wrap"><div className="section-title"><p className="eyebrow">02 — EXPERIENCE</p><h2>Experience</h2></div><div className="role-heading"><div><h3>Publicis Sapient</h3><p>Associate Software Development Engineer 2 <span>(ASDE-2)</span></p></div><div className="role-meta">Bengaluru, India<br />Nov 2023 – Present</div></div><div className="workstreams">{workstreams.map((item, i) => <article className="workstream" key={item.name}><div className="workstream-meta"><span>0{i + 1}</span><time>{item.dates}</time></div><div className="workstream-body"><h4>{item.name}</h4><ul>{item.details.map(detail => <li key={detail}>{detail}</li>)}</ul><div className="tag-list">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div><article className="internship"><div className="internship-date">OCT 2022 – DEC 2022 <span>· REMOTE</span></div><div><p className="eyebrow">PREVIOUS EXPERIENCE</p><h3>Let's Grow More <span>(LGMVIP)</span></h3><h4>Web Development Intern</h4><p>Worked on developing and refining responsive UI components using HTML, CSS, JavaScript and Bootstrap, including API integration and dynamic content handling.</p></div></article></div></section>
+      <section className="section wrap projects" id="projects"><div className="section-title"><p className="eyebrow">03 — PROJECT</p><h2>Selected work</h2></div><article className="featured-project"><div className="project-count">FEATURED PROJECT <span>01 / 01</span></div><div className="featured-content"><div><h3>CSV Validation Service</h3><p className="project-lead">A schema-driven service for validating large CSV uploads against dynamic schemas.</p><p>Built with Java and Spring Boot. Supports partial-success processing, generates failed-record reports, and exposes REST APIs for schema upload, validation, and error retrieval.</p><div className="tag-list">{['Java', 'Spring Boot', 'REST APIs'].map(tag => <span key={tag}>{tag}</span>)}</div></div><div className="project-diagram" aria-label="CSV validation workflow diagram"><span>CSV UPLOAD</span><i>→</i><span>VALIDATE</span><i>→</i><span>REPORT</span></div></div></article></section>
+      <section className="section skills-section" id="skills"><div className="wrap"><div className="section-title"><p className="eyebrow">04 — TOOLKIT</p><h2>Skills</h2></div><div className="skills-grid">{skillGroups.map(([heading, tags], i) => <div className="skill-group" key={heading}><span className="skill-num">0{i + 1}</span><h3>{heading}</h3><div className="tag-list">{tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>)}</div></div></section>
+      <section className="section wrap education" id="education"><div className="section-title"><p className="eyebrow">05 — EDUCATION</p><h2>Education</h2></div><div className="education-card"><div className="education-monogram">NIT<br />R</div><div><p className="eyebrow">2019 – 2023</p><h3>National Institute of Technology, Rourkela</h3><p>B.Tech in Computer Science and Engineering</p></div><div className="grade"><span>CGPA</span><b>8.16</b></div></div></section>
+      <section className="contact-section" id="contact"><div className="wrap contact-wrap"><div><p className="eyebrow">06 — CONTACT</p><h2>Let’s connect.</h2><p>Reach out if you’d like to talk about software engineering, interesting work, or opportunities.</p><a className="btn light-btn" href="mailto:thokalajathin@gmail.com">Get in touch ↗</a></div><div className="contact-details"><a href="mailto:thokalajathin@gmail.com"><span>EMAIL</span><b>thokalajathin@gmail.com</b><i>↗</i></a><a href="tel:+917893417977"><span>PHONE</span><b>+91 7893417977</b><i>↗</i></a><a href="https://www.linkedin.com/in/jathinthokala" target="_blank" rel="noreferrer"><span>LINKEDIN</span><b>linkedin.com/in/jathinthokala</b><i>↗</i></a><a href="https://github.com/JathinT" target="_blank" rel="noreferrer"><span>GITHUB</span><b>github.com/JathinT</b><i>↗</i></a><span className="contact-location">Bengaluru, India</span></div></div></section>
+    </main>
+    <footer className="footer wrap"><a className="brand" href="#home">JT<span>.</span></a><span>Jathin Thokala · Software Engineer</span><div><a href="https://github.com/JathinT" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/jathinthokala" target="_blank" rel="noreferrer">LinkedIn ↗</a></div><small>© 2026</small></footer>
+  </div>
 }
-
 export default App
+
